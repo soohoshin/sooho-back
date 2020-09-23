@@ -1,0 +1,58 @@
+
+<ul class="pagination">
+    {% set blockState = (param.page - 1) // (pageBlockSize) %}
+    {% set startPage = blockState * pageBlockSize + 1 %}
+    {% set endPage = blockState * pageBlockSize + pageBlockSize%}
+    {% if endPage > pageTotalCount %}
+        {% set endPage = pageTotalCount%}
+    {% endif %}
+    {% if nextPageBlock > pageTotalCount %}
+        {% set nextPageBlock = pageTotalCount%}
+    {% endif %}
+
+    <li>
+        {% if startPage == 1 %}
+        <a style="background-color:#ddd;color:#aaa;cursor: auto;" href="#">
+        {% else %}
+        <a href="?type={{param.type}}&searchName={{param.searchName}}&page={{beforePageBlock}}">
+        {% endif %}
+        <<
+        </a>  
+    </li>
+    <li>
+        {% if param.page == 1 %}
+        <a style="background-color:#ddd;color:#aaa;cursor: auto;" href="#">
+        {% else %}
+        <a href="?type={{param.type}}&searchName={{param.searchName}}&page={{beforePage}}">
+        {% endif %}
+        <
+        </a>  
+    </li>
+    
+    {% for i in range(startPage, endPage + 1 )%}
+        <li><a
+            {%if i == param.page %}
+            style="background-color: #337ab7; color:white"
+            {% endif %}
+            href="?type={{param.type}}&searchName={{param.searchName}}&page={{i}}">{{i}}</a></li>
+    {% endfor%}
+
+    <li>
+        {% if param.page == pageTotalCount %}
+        <a style="background-color:#ddd;color:#aaa;cursor:auto;" href="#">
+        {% else %}
+        <a  href="?type={{param.type}}&searchName={{param.searchName}}&page={{nextPage}}">
+        {% endif %}
+        >
+        </a>
+    </li>
+    <li>
+        {% if endPage == pageTotalCount %}
+        <a style="background-color:#ddd;color:#aaa;cursor:auto;" href="#">
+        {% else %}
+        <a href="?type={{param.type}}&searchName={{param.searchName}}&page={{nextPageBlock}}">
+        {% endif %}
+        >>
+        </a>
+    </li>
+</ul>
