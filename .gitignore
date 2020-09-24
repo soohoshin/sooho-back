@@ -12,3 +12,7 @@ Desktop.ini
 node_modules
 package-lock.json
 *.log
+
+# dotenv environment variables file
+.env
+.env.test
